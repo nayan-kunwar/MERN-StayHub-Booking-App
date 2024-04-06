@@ -5,20 +5,20 @@ import bcrypt from "bcryptjs";
 const userSchema = new mongoose.Schema({
     email: {
         type: String,
-        required: true,
+        required: [true, "Email is Required"], // Can catch error in console while regsitering user. Empty stiring will also invalid.
         unique: true
     },
     password: {
         type: String,
-        required: true,
+        required: [true, "Password must be 6 characters or more"],
     },
     firstName: {
         type: String,
-        required: true,
+        required: [true, "First Name is Required"],
     },
     lastName: {
         type: String,
-        required: true,
+        required: [true, "Last Name is Required"], 
     }
 }, { timestamps: true });
 
