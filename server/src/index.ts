@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import "dotenv/config"; // Loads env variables when app start.
-import connectToDb from "./db/index"
-import userRoutes from "./routes/users"
+import connectToDb from "./db/index";
+import userRoutes from "./routes/users";
+import authRoutes from "./routes/auth";
 
 //DB Connection
 connectToDb()
@@ -20,10 +21,12 @@ const app = express();
 //Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors()); 
+app.use(cors());
 
 //APIs
+app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+
 
 // //API for testing
 // app.get("/api/test", (req: Request, res: Response) => {

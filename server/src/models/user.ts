@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     },
     lastName: {
         type: String,
-        required: [true, "Last Name is Required"], 
+        required: [true, "Last Name is Required"],
     }
 }, { timestamps: true });
 
@@ -27,12 +27,17 @@ const userSchema = new mongoose.Schema({
 //before being stored in the database, providing the necessary security measure for user credentials.
 
 // Middleware to hash the password before saving.
-userSchema.pre("save", async function(next){
-    if(this.isModified("password")){
+userSchema.pre("save", async function (next) {
+    if (this.isModified("password")) {
         this.password = await bcrypt.hash(this.password, 8)
     }
     next();
 })
+
+//Mongoose: Instance methods or Instance methods in typscript
+// userSchema.methods.isPasswordValid = async function (password) {
+//     return await bcrypt.compare(password, this.password);
+// }
 
 const User = mongoose.model<UserType>("User", userSchema);
 export default User;

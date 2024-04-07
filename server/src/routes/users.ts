@@ -1,5 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
-import { Router } from "express";
+import express from "express";
 import { registerUser } from "../controllers/users";
 import { validateRegisterInput } from "../middleware/validateRegisterInput";
 

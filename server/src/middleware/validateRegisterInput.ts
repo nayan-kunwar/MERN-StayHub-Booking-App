@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { check, validationResult } from "express-validator";
 
-//Middleware for validating user input. 
+//Middleware for validating register user input. 
 // If any field missing out will throw error. 
 // If empty string is there then will not through error but mongoose schema validation will through error
 export const validateRegisterInput = [
@@ -17,3 +17,16 @@ export const validateRegisterInput = [
     next(); // This wiil call registerUser controller as nothing goes wrong in above middleware.
   },
 ];
+
+//Middleware for validating login user input. 
+export const validateLoginUser = [
+  check("email", "Email is required.").isEmail(),
+  check("password", "Password must be at least 6 characters.").isLength({ min: 6 }),
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next(); // This wiil call loginUser controller as nothing goes wrong in above middleware.
+  },
+]
