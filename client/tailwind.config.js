@@ -7,7 +7,9 @@ export default {
   theme: {
     extend: {},
     container: {
-      padding: "10rem",
+      padding: {
+        md: "10rem" //Apply padding for medium size and greater
+      },
     }
   },
   plugins: [],
