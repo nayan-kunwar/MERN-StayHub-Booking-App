@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import * as apiClient from "../api-client";
 
 export type RegisterFormData = {
     firstName: string;
@@ -22,11 +24,24 @@ export type RegisterFormData = {
 const Register = () => {
     const { register, watch, handleSubmit, formState: { errors } } = useForm<RegisterFormData>();
 
-    const onSubmitHandler = handleSubmit((data) => { // handleSubmit will be called when all input field are valid. and data will be printed on console.
-        console.log(data); // data = {containing all input field in key value pair}
+    const mutation = useMutation(apiClient.register, {
+        onSuccess: () => {
+            console.log(`User registration successful`)
+        },
+        onError: (error: Error) => {
+            console.log(error.message)
+        }
     });
-    // console.log(`errors: ${errors.firstName?.message}`);
-    console.log(watch("firstName")); // you can watch individual input/value of input field
+
+    // handleSubmit will be called when all input field are valid. and data will be printed on console. It has a function which recive data on successful validation
+    const onSubmitHandler = handleSubmit((data) => {
+        //console.log(data); // object: data = {containing all input field in key value pair}
+        mutation.mutate(data); //Will call apiClient.register and pass data to it
+    });
+
+    //console.log(`errors: ${errors.firstName?.message}`);
+    //console.log(watch("firstName")); // you can watch individual input/value of input field
+
     return (
         <form className="flex flex-col gap-5"
             onSubmit={onSubmitHandler}>

@@ -23,7 +23,7 @@ export const registerUser = async (req: Request, res: Response) => {
             secure: process.env.NODE_ENV === "production",
             maxAge: 86400000 // milliseconds
         });
-        return res.sendStatus(201).json({ message: "User registered Successfully" }); // Working fine without return.
+        return res.status(201).send({ message: "User registered Successfully" }); // Working fine without return. 
     } catch (error) {
         console.log("Error in registerUser controller-", error); // Can catch error in console while regsitering user.
         return res.status(500).json({ message: "Something went wrong." });
