@@ -8,6 +8,7 @@ export const register = async (formData: RegisterFormData) => {
     // Send a POST request to the user registration endpoint
     const response = await fetch(`${API_BASE_URL}/api/users/register`, {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json"
         },

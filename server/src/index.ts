@@ -4,6 +4,8 @@ import "dotenv/config"; // Loads env variables when app start.
 import connectToDb from "./db/index";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
+import cookie from "cookie-parser";
+import cookieParser from "cookie-parser";
 
 //DB Connection
 connectToDb()
@@ -19,9 +21,13 @@ connectToDb()
 const app = express();
 
 //Middlewares
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+}));
 
 //APIs
 app.use("/api/auth", authRoutes);
