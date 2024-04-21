@@ -12,6 +12,7 @@ declare global {
 
 // Middleware function to verify JWT token and extract userId
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+    //console.log(req.cookies); {auth_token: ""}
     const token = req.cookies["auth_token"];
     if (!token) {
         return res.status(401).send({ message: "Unauthorized!" });
