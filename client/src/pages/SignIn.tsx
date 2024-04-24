@@ -17,7 +17,7 @@ const SignIn = () => {
 
     const mutation = useMutation(apiClient.signIn, {
         onSuccess: async () => {
-            showToast({ message: "Login Successful", type: "SUCCESS" });
+            showToast({ message: "Sign in Successful!", type: "SUCCESS" });
             await queryClient.invalidateQueries("validateToken"); // show the protected nav link when login
             navigate("/");
         },

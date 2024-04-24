@@ -32,7 +32,7 @@ const Register = () => {
     const mutation = useMutation(apiClient.register, {
         onSuccess: async () => {
             //console.log(`User registration successful`)
-            showToast({ message: "Registration Successful", type: "SUCCESS" });
+            showToast({ message: "Registration Success!", type: "SUCCESS" });
             await queryClient.invalidateQueries("validateToken"); // show the protected nav link when register
             navigate("/");
         },
