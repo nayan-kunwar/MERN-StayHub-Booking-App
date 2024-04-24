@@ -44,6 +44,14 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 }
 
+// Logout User Controller
+export const logoutUser = (req: Request, res: Response) => {
+    res.cookie("auth_token", "", {
+        expires: new Date(0)
+    });
+    res.send();
+}
+
 export const validateToken = async (req: Request, res: Response) => {
     res.status(200).send({ userId: req.userId }); //response.json = {userId: '66256375182af6b9a7a33238'}
 }

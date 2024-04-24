@@ -1,4 +1,5 @@
 import { RegisterFormData } from "./pages/Register";
+import { SignInFormData } from "./pages/SignIn";
 
 // Retrieve API base URL from environment variables
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -25,6 +26,37 @@ export const register = async (formData: RegisterFormData) => {
     }
 }
 
+// Fuction to sign in a user
+export const signIn = async (formData: SignInFormData) => {
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData),
+    });
+
+    const responseBody = await response.json(); //{message: ""}
+    if (!response.ok) {
+        throw new Error(responseBody.message);
+    }
+
+    return responseBody;
+}
+
+// Fuction to sign in a user
+export const signOut = async () => {
+    const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
+        method: "POSt",
+        credentials: "include",
+    });
+    if(!response.ok){
+        throw new Error("Error during sign out");
+    }
+}
+
+// Function to validate token
 export const validateToken = async () => {
     const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
         credentials: "include",
@@ -37,3 +69,4 @@ export const validateToken = async () => {
     //console.log(data); // Output the parsed JSON data
     return data;
 }
+
