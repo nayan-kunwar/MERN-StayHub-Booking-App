@@ -6,6 +6,7 @@ import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
 import cookie from "cookie-parser";
 import cookieParser from "cookie-parser";
+import path from "path";
 
 //DB Connection
 connectToDb()
@@ -28,6 +29,7 @@ app.use(cors({
     origin: process.env.FRONTEND_URL,
     credentials: true
 }));
+app.use(express.static(path.join(__dirname, "../../client/dist")));
 
 //APIs
 app.use("/api/auth", authRoutes);
