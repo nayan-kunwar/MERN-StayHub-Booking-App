@@ -1,5 +1,5 @@
 import express from "express";
-import { validateLoginUser } from "../middleware/validateRegisterInput";
+import { validateLoginUser } from "../middleware/validateInputFields/validateInput";
 import { loginUser, logoutUser, validateToken } from "../controllers/auth";
 import { verifyToken } from "../middleware/auth";
 

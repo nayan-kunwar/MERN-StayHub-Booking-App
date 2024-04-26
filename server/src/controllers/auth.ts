@@ -52,6 +52,7 @@ export const logoutUser = (req: Request, res: Response) => {
     res.send();
 }
 
+// Validate token Controller
 export const validateToken = async (req: Request, res: Response) => {
     res.status(200).send({ userId: req.userId }); //response.json = {userId: '66256375182af6b9a7a33238'}
 }

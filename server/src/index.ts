@@ -4,6 +4,7 @@ import "dotenv/config"; // Loads env variables when app start.
 import connectToDb from "./db/index";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
+import myHotelsRoutes from "./routes/my-hotels";
 import cookie from "cookie-parser";
 import cookieParser from "cookie-parser";
 import path from "path";
@@ -41,6 +42,7 @@ app.use(express.static(path.join(__dirname, "../../client/dist")));
 //APIs
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/my-hotels", myHotelsRoutes);
 
 
 // //API for testing
