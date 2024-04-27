@@ -6,6 +6,7 @@ import GuestsSection from "./GuestsSection";
 import ImagesSection from "./ImagesSection";
 // import {HotelType} from "../../../../server/src/shared/types/types"
 
+// name, city are register to input field, HotelFormData will check for type
 export type HotelFormData = {
   name: string;
   city: string;
@@ -20,14 +21,16 @@ export type HotelFormData = {
   adultCount: number;
   childCount: number;
 };
+
 type Props = {
   // hotel?: HotelType;
   onSave: (hotelFormData: FormData) => void;
   isLoading: boolean;
 };
+
 const ManageHotelForm = ({ onSave, isLoading }: Props) => {
   //console.log('onSave function:', onSave); // Debugging line
-  const formMethods = useForm<HotelFormData>();
+  const formMethods = useForm<HotelFormData>(); // Create a new instance of FormData to collect and prepare form data for submission
   const { handleSubmit } = formMethods;
 
   const onSubmitHandler = handleSubmit((formDataJson: HotelFormData) => {
