@@ -19,7 +19,7 @@ const AppContext = React.createContext<AppContext | undefined>(undefined);
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
     const { isError } = useQuery("validateToken", apiClient.validateToken, { retry: false });
-    console.log(isError);
+    //console.log(isError);
     // Return the AppContext.Provider component, which will wrap the children
     return (
         <AppContext.Provider

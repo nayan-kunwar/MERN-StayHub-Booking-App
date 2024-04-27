@@ -2,9 +2,9 @@ import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
 
 // Retrieve API base URL from environment variables
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
-// Function to register a user
+// Function to Register a User
 export const register = async (formData: RegisterFormData) => {
     // Send a POST request to the user registration endpoint
     const response = await fetch(`${API_BASE_URL}/api/users/register`, {
@@ -26,7 +26,7 @@ export const register = async (formData: RegisterFormData) => {
     }
 }
 
-// Fuction to sign in a user
+// Fuction to Sign In a User
 export const signIn = async (formData: SignInFormData) => {
     const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
@@ -45,18 +45,18 @@ export const signIn = async (formData: SignInFormData) => {
     return responseBody;
 }
 
-// Fuction to sign in a user
+// Fuction to Sign Out a User
 export const signOut = async () => {
     const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
         method: "POSt",
         credentials: "include",
     });
-    if(!response.ok){
+    if (!response.ok) {
         throw new Error("Error during sign out");
     }
 }
 
-// Function to validate token
+// Function to Validate Token
 export const validateToken = async () => {
     const response = await fetch(`${API_BASE_URL}/api/auth/validate-token`, {
         credentials: "include",
@@ -69,4 +69,19 @@ export const validateToken = async () => {
     //console.log(data); // Output the parsed JSON data
     return data;
 }
+
+// Function to Add Hotel
+export const addMyHotel = async (hotelFormData: FormData) => {
+    const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+        method: "POST",
+        credentials: "include",
+        body: hotelFormData,
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to add hotel");
+    }
+
+    return response.json();
+};
 
