@@ -37,6 +37,8 @@ app.use(cors({
     origin: process.env.FRONTEND_URL,
     credentials: true
 }));
+
+// Bundle frontend code with backend code, so both can serve from same server. Frontend protected route will not be here like add-hotel add manually
 app.use(express.static(path.join(__dirname, "../../client/dist")));
 
 //APIs
@@ -44,6 +46,12 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelsRoutes);
 
+// Request are not api routes[backend routes] like add-hotel and req those are behind conditional logic go to [ index.html ] in dist folder of client. 
+// And react router will handle req like [ add-hotel ] req. 
+// protect routes like add-hotel and routes behind conditional logic are not part of static file that we deployed on deploy time ../../client/dist, they generated on when user requested 
+app.get("*", (req: Request, res:Response)=>{
+    res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
+});
 
 // //API for testing
 // app.get("/api/test", (req: Request, res: Response) => {

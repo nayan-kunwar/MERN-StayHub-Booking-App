@@ -31,6 +31,16 @@ export const myHotels = async (req: Request, res: Response) => {
     }
 }
 
+// GET All Hotels
+export const getAllHotels = async (req: Request, res: Response) => {
+    try {
+        const hotels = await Hotel.find({ userId: req.userId });
+        res.json(hotels);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching hotels" });
+    }
+}
+
 // Function to upload images to cloudinary
 async function uploadImages(imageFiles: Express.Multer.File[]) {
     // Map each image file to a promise that uploads it to cloudinary and returns its URL
