@@ -14,7 +14,7 @@ const upload = multer({
 });
 
 // api/my-hotels
-router.post("/", verifyToken, myHotelsInput, upload.array("imageFiles", 6), myHotels);
-router.get("/", verifyToken, getAllHotels);
+router.post("/", verifyToken, myHotelsInput, upload.array("imageFiles", 6), myHotels); // Route for adding a new hotel, accept HTTP POST requests.
+router.get("/", verifyToken, getAllHotels);  // Route for retrieving all hotels,  accept HTTP GET requests.
 
 export default router;

@@ -1,6 +1,6 @@
 import { RegisterFormData } from "./pages/Register";
 import { SignInFormData } from "./pages/SignIn";
-
+import { HotelType } from "../../server/src/shared/types/types"
 // Retrieve API base URL from environment variables
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -85,3 +85,15 @@ export const addMyHotel = async (hotelFormData: FormData) => {
     return response.json();
 };
 
+// Function to Get All Hotels
+export const fetchMyHotels = async (): Promise<HotelType[]> => { //Frontend and backend using same type, any changes in type reflect on both directly
+    const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+        credentials: "include" // Tell browser to send the http cookie with fetch request
+    });
+
+    if (!response.ok) {
+        throw new Error("Error fetching hotels");
+    }
+
+    return response.json(); // body of response. Array of hotels
+}
