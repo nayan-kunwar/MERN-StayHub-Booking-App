@@ -88,7 +88,7 @@ export const addMyHotel = async (hotelFormData: FormData) => {
 // Function to Get All Hotels
 export const fetchMyHotels = async (): Promise<HotelType[]> => { //Frontend and backend using same type, any changes in type reflect on both directly
     const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
-        credentials: "include" // Tell browser to send the http cookie with fetch request
+        credentials: "include" // Tells browser to send the http cookie with fetch request
     });
 
     if (!response.ok) {
@@ -96,4 +96,17 @@ export const fetchMyHotels = async (): Promise<HotelType[]> => { //Frontend and 
     }
 
     return response.json(); // body of response. Array of hotels
+}
+
+// Function to Get single Hotel
+export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => { // component will know this function will return single hotel.
+    const response = await fetch(`${API_BASE_URL}/my-hotels/${hotelId}`, {
+        credentials: "include" // Tells browser to send the http cookie with fetch request
+    });
+
+    if (!response.ok) {
+        throw new Error("Error fetching hotels");
+    }
+
+    return response.json(); // body of response. individual hotel 
 }
