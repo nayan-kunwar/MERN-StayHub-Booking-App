@@ -98,7 +98,7 @@ export const fetchMyHotels = async (): Promise<HotelType[]> => { //Frontend and 
     return response.json(); // body of response. Array of hotels
 }
 
-// Function to Get single Hotel
+// Function to Get Hotel By Id
 export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => { // component will know this function will return single hotel.
     const response = await fetch(`${API_BASE_URL}/my-hotels/${hotelId}`, {
         credentials: "include" // Tells browser to send the http cookie with fetch request
@@ -110,3 +110,20 @@ export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
 
     return response.json(); // body of response. individual hotel 
 }
+
+// Function to Upadate Hotel By Id
+export const updateMyHotelById = async (hotelFormData: FormData) => {
+    const response = await fetch(`${API_BASE_URL}/api/my-hotels/${hotelFormData.get("hotelId")}`,
+        {
+            method: "PUT",
+            body: hotelFormData,
+            credentials: "include",
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to update Hotel");
+    }
+
+    return response.json();
+};
