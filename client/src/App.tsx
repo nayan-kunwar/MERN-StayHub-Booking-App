@@ -6,6 +6,7 @@ import { useAppContext } from "./contexts/AppContext";
 // import ManageHotelForm from "./forms/ManageHotelForm/ManageHotelForm";  
 import AddHotel from "./pages/AddHotel";
 import MyHotels from "./pages/MyHotels";
+import EditHotel from "./pages/EditHotel";
 function App() {
   const { isLoggedIn } = useAppContext();
   return (
@@ -19,6 +20,7 @@ function App() {
           <>
             <Route path="/add-hotel" element={<Layout><AddHotel /></Layout>} />
             <Route path="/my-hotels" element={<Layout><MyHotels /></Layout>} />
+            <Route path="/edit-hotel/:hotelId" element={<Layout><EditHotel /></Layout>} /> {/* Available :hotelId in usePramas()*/}
           </>}
         <Route path="*" element={<Navigate to="/" />} /> {/*If user visit any endpoint other than above mentioned navigate user to Home Page */}
       </Routes>
