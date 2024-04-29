@@ -100,7 +100,7 @@ export const fetchMyHotels = async (): Promise<HotelType[]> => { //Frontend and 
 
 // Function to Get Hotel By Id
 export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => { // component will know this function will return single hotel.
-    const response = await fetch(`${API_BASE_URL}/my-hotels/${hotelId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/my-hotels/${hotelId}`, {
         credentials: "include" // Tells browser to send the http cookie with fetch request
     });
 
