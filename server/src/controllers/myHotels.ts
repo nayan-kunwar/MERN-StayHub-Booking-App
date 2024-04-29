@@ -45,13 +45,46 @@ export const getAllHotels = async (req: Request, res: Response) => {
 export const getHotelById = async (req: Request, res: Response) => {
     try {
         const id = req.params.id.toString();
-        const hotel = await Hotel.find({ _id: id, userId: req.userId });
-        res.json(hotel);
+        const hotel = await Hotel.findOne({ _id: id, userId: req.userId });
+        res.json(hotel); // Individula object. hotel = {}
     } catch (error) {
         res.status(500).json({ message: "Error fetching hotels" });
     }
 }
 
+// Upadate Hotel By Id
+export const updateMyHotelById = async (req: Request, res: Response) => {
+    try {
+        const updatedHotel: HotelType = req.body;
+        updatedHotel.lastUpdated = new Date();
+
+        const hotel = await Hotel.findOneAndUpdate(
+            {
+                _id: req.params.hotelId,
+                userId: req.userId,
+            },
+            updatedHotel,
+            { new: true }
+        );
+
+        if (!hotel) {
+            return res.status(404).json({ message: "Hotel not found" });
+        }
+
+        const files = req.files as Express.Multer.File[];
+        const updatedImageUrls = await uploadImages(files);
+
+        hotel.imageUrls = [
+            ...updatedImageUrls,
+            ...(updatedHotel.imageUrls || []),
+        ];
+
+        await hotel.save();
+        res.status(201).json(hotel);
+    } catch (error) {
+        res.status(500).json({ message: "Something went throw" });
+    }
+}
 // Function to upload images to cloudinary
 async function uploadImages(imageFiles: Express.Multer.File[]) {
     // Map each image file to a promise that uploads it to cloudinary and returns its URL
