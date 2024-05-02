@@ -32,6 +32,7 @@ export const SearchContextProvider = ({
     const [childCount, setChildCount] = useState<number>(1)
     const [hotelId, setHotelId] = useState<string>("");
 
+    // Save search input from SearchBar component. Save value from local state to global state.
     const saveSearchValues = (
         destination: string,
         checkIn: Date,
