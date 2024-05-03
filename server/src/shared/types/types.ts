@@ -1,3 +1,4 @@
+//Can put these typws in individual file like user.ts
 // User Types
 export type UserType = {
     _id: string;
