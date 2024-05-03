@@ -5,9 +5,9 @@ export type SearchParams = {
     adultCount?: string;
     childCount?: string;
     page?: string;
-    // facilities?: string[];
-    // types?: string[];
-    // stars?: string[];
-    // maxPrice?: string;
-    // sortOption?: string;
+    facilities?: string[];
+    types?: string[];
+    stars?: string[];
+    maxPrice?: string;
+    sortOption?: string;
 };
