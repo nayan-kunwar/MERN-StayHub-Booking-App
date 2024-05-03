@@ -1,4 +1,5 @@
 import { hotelTypes } from "../config/hotel-options-config";
+import { v4 as uuidv4 } from 'uuid';
 
 type Props = {
     selectedHotelTypes: string[];
@@ -10,7 +11,7 @@ const HotelTypesFilter = ({ selectedHotelTypes, onChange }: Props) => {
         <div className="border-b border-slate-300 pb-5">
             <h4 className="text-md font-semibold mb-2">Hotel Type</h4>
             {hotelTypes.map((hotelType) => (
-                <label className="flex items-center space-x-2">
+                <label className="flex items-center space-x-2" key={uuidv4()}>
                     <input
                         type="checkbox"
                         className="rounded"

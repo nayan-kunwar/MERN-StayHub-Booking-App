@@ -8,6 +8,8 @@ import StarRatingFilter from "../components/StarRatingFilter";
 import HotelTypesFilter from "../components/HotelTypesFilter";
 import FacilitiesFilter from "../components/FacilitiesFilter";
 import PriceFilter from "../components/PriceFilter";
+import { v4 as uuidv4 } from 'uuid';
+
 const Search = () => {
     const search = useSearchContext();
     //console.log(search);
@@ -96,7 +98,7 @@ const Search = () => {
                     {/* TODO Sort Options */}
                 </div>
                 {hotelData?.data.map((hotel) => (
-                    <SearchResultsCard hotel={hotel} />
+                    <SearchResultsCard hotel={hotel} key={uuidv4()}/>
                 ))}
                 <div>
                     <Pagination
