@@ -85,6 +85,7 @@ export const updateMyHotelById = async (req: Request, res: Response) => {
         res.status(500).json({ message: "Something went throw" });
     }
 }
+
 // Function to upload images to cloudinary
 async function uploadImages(imageFiles: Express.Multer.File[]) {
     // Map each image file to a promise that uploads it to cloudinary and returns its URL
