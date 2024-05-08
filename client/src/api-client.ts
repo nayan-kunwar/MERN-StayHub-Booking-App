@@ -5,6 +5,17 @@ import { SearchParams } from "./types/searchParams";
 // Retrieve API base URL from environment variables
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
+// Function to get current user
+export const fetchCurrentUser = async () => {
+    const response = await fetch(`${API_BASE_URL}/api/users/me`, {
+        credentials: "include"
+    });
+    if (!response.ok) {
+        throw new Error("Error fetching user");
+    }
+    return response.json();
+}
+
 // Function to Register a User
 export const register = async (formData: RegisterFormData) => {
     // Send a POST request to the user registration endpoint
