@@ -50,6 +50,7 @@ export const SearchContextProvider = ({
             setHotelId(hotelId);
         }
 
+        //work for individual tab
         sessionStorage.setItem("destination", destination);
         sessionStorage.setItem("checkIn", checkIn.toISOString());
         sessionStorage.setItem("checkOut", checkOut.toISOString());
