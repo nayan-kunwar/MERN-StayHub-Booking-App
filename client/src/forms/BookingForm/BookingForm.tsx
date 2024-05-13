@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
-import { PaymentIntentResponse, UserType } from "../../../../server/src/shared/types/types";
+import {
+    PaymentIntentResponse,
+    UserType,
+} from "../../../../server/src/shared/types/types";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { StripeCardElement } from "@stripe/stripe-js";
 import { useSearchContext } from "../../contexts/SearchContext";
 import { useParams } from "react-router-dom";
-import { useAppContext } from "../../contexts/AppContext";
 import { useMutation } from "react-query";
 import * as apiClient from "../../api-client";
+import { useAppContext } from "../../contexts/AppContext";
 
 type Props = {
     currentUser: UserType;
@@ -29,8 +32,10 @@ export type BookingFormData = {
 const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     const stripe = useStripe();
     const elements = useElements();
+
     const search = useSearchContext();
     const { hotelId } = useParams();
+
     const { showToast } = useAppContext();
 
     const { mutate: bookRoom, isLoading } = useMutation(
@@ -44,6 +49,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
             },
         }
     );
+
     const { handleSubmit, register } = useForm<BookingFormData>({
         defaultValues: {
             firstName: currentUser.firstName,
@@ -73,12 +79,13 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
         if (result.paymentIntent?.status === "succeeded") {
             bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id });
         }
-    }
+    };
 
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="grid grid-cols-1 gap-5 rounded-lg border border-slate-300 p-5">
+            className="grid grid-cols-1 gap-5 rounded-lg border border-slate-300 p-5"
+        >
             <span className="text-3xl font-bold">Confirm Your Details</span>
             <div className="grid grid-cols-2 gap-6">
                 <label className="text-gray-700 text-sm font-bold flex-1">
@@ -133,7 +140,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
             </div>
 
             <div className="flex justify-end">
-                <button
+                <button  
                     disabled={isLoading}
                     type="submit"
                     className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-md disabled:bg-gray-500"
@@ -143,6 +150,6 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
             </div>
         </form>
     );
-}
+};
 
 export default BookingForm;

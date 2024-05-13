@@ -25,17 +25,35 @@ const Booking = () => {
         }
     }, [search.checkIn, search.checkOut]);
 
-    const { data: paymentIntentData } = useQuery("createPaymentIntent", () => apiClient.createPaymentIntent(hotelId as string, numberOfNights.toString()),
+    const { data: paymentIntentData } = useQuery(
+        "createPaymentIntent",
+        () =>
+            apiClient.createPaymentIntent(
+                hotelId as string,
+                numberOfNights.toString()
+            ),
         {
-            enabled: !!hotelId && numberOfNights > 0
-        });
+            enabled: !!hotelId && numberOfNights > 0,
+        }
+    );
 
-    const { data: hotel } = useQuery("fetchHotelByID", () => apiClient.fetchHotelById(hotelId as string), { enabled: !!hotelId, });
-    const { data: currentUser } = useQuery("fetchCurrentUser", apiClient.fetchCurrentUser);
-    //console.log(currentUser?.email);
+    const { data: hotel } = useQuery(
+        "fetchHotelByID",
+        () => apiClient.fetchHotelById(hotelId as string),
+        {
+            enabled: !!hotelId,
+        }
+    );
+
+    const { data: currentUser } = useQuery(
+        "fetchCurrentUser",
+        apiClient.fetchCurrentUser
+    );
+
     if (!hotel) {
         return <></>;
     }
+
     return (
         <div className="grid md:grid-cols-[1fr_2fr]">
             <BookingDetailsSummary
@@ -61,6 +79,6 @@ const Booking = () => {
             )}
         </div>
     );
-}
+};
 
 export default Booking;
